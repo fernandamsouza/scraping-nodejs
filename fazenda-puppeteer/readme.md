@@ -1,4 +1,4 @@
-BOT A FAZENDA 2020
+## BOT A FAZENDA 2020
 
-1. yarn add puppeteer
-2. node index.js
+- yarn add puppeteer
+- node index.js
