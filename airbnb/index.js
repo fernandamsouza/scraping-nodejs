@@ -35,8 +35,17 @@ async function scrapeDescriptionPage(url, page){
         const bedrooms = returnMatches(roomText, /\d+ quarto/);
         const beds = returnMatches(roomText, /\d+ cama/);
         const bathroom = returnMatches(roomText, /\d+ banheiro/);
+        await page.click('button._ejra3kg');
+        await page.click('a._13xgr5hw');
+        const description = $("#site-content > div > div > div > div > div > div:nth-child(3) > div > div:nth-child(2) > div > span > div > div").text();
         //console.log(pricePerNight, guestsAllowed, bedrooms, beds, bathroom);
-        return { url, pricePerNight, guestsAllowed, bedrooms, beds, bathroom };
+        /*
+        $("#site-content > div > div > div:nth-child(1) > div:nth-child(2) > div > div > div > div > div > div > div > div > div").each((index, element) => {
+            if (index == 0) return true;
+            const figure = $(element).find("")
+        });
+        */
+        return { description, url, pricePerNight, guestsAllowed, bedrooms, beds, bathroom };
     } catch(err) {
         console.error(err);
         console.error(url);
