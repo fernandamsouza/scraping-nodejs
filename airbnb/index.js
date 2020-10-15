@@ -35,10 +35,11 @@ async function scrapeDescriptionPage(url, page){
         const bedrooms = returnMatches(roomText, /\d+ quarto/);
         const beds = returnMatches(roomText, /\d+ cama/);
         const bathroom = returnMatches(roomText, /\d+ banheiro/);
-        console.log(pricePerNight, guestsAllowed, bedrooms, beds, bathroom);
-        return { pricePerNight, guestsAllowed, bedrooms, beds, bathroom };
+        //console.log(pricePerNight, guestsAllowed, bedrooms, beds, bathroom);
+        return { url, pricePerNight, guestsAllowed, bedrooms, beds, bathroom };
     } catch(err) {
         console.error(err);
+        console.error(url);
     }
 }
 
@@ -60,7 +61,8 @@ async function main() {
     const homes = await scrapeHomesInIndexPage("https://www.airbnb.com.br/s/Florian%C3%B3polis-~-SC/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&source=structured_search_input_header&search_type=pagination&place_id=ChIJ1zLGsk45J5URRscEagtVvIE&federated_search_session_id=b1fe5bbd-7dd7-4656-bbbd-7eeaf81111c0&items_offset=20&section_offset=3");
     console.log(homes);
     for(var i = 0; i < homes.length; i++) {
-        await scrapeDescriptionPage(homes[i], descriptionPage);
+        const result = await scrapeDescriptionPage(homes[i], descriptionPage);
+        console.log(result);
     }
 }
 
